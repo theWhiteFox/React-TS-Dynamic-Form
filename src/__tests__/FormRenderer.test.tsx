@@ -76,10 +76,10 @@ describe('FormRenderer Component', () => {
     it('renders the DateField and allows date selection', async () => {
         render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
 
-        const dateLabel = screen.getByText(/Date of Birth/i)
+        const dateLabel = screen.getByText(/D.O.B/i)
         expect(dateLabel).toBeInTheDocument()
 
-        const dateInput = screen.getByRole('textbox', { name: /Date of Birth/i })
+        const dateInput = screen.getByRole('textbox', { name: /D.O.B/i })
         expect(dateInput).toBeInTheDocument()
 
         await userEvent.click(dateInput)
