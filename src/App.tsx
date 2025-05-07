@@ -1,6 +1,8 @@
 import FormRenderer from './components/FormRenderer'
-import { schema, myFormSchema } from './lib/schema'
 import { createGlobalStyle } from 'styled-components'
+import { FormProvider } from './providers/useFormProvider'
+import { uiSchema, validationZodSchema } from './lib/schema'
+
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -11,10 +13,13 @@ const GlobalStyle = createGlobalStyle`
 `
 
 function App() {
+
   return (
     <>
       <GlobalStyle />
-      <FormRenderer schema={schema} zodSchema={myFormSchema} />
+      <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+        <FormRenderer />
+      </FormProvider>
     </>
   )
 

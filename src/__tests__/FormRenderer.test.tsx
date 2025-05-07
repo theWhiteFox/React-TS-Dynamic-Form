@@ -1,20 +1,29 @@
 import '@testing-library/jest-dom'
 import { describe, it, expect } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import FormRenderer from '../components/FormRenderer' // Adjust import path
-import { myFormSchema, schema } from '../lib/schema' // Adjust import path
+import FormRenderer from '../components/FormRenderer'
+import { FormProvider } from '../providers/useFormProvider'
+import { uiSchema, validationZodSchema } from '../lib/schema'
 
 describe('FormRenderer Component', () => {
     it('renders the form title', () => {
-        render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
-        expect(screen.getByText(schema.title)).toBeInTheDocument()
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
+        expect(screen.getByText(uiSchema.title)).toBeInTheDocument()
     })
 
     it('renders the form fields based on the schema', () => {
-        render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
 
-        schema.fields.forEach((field) => {
+        uiSchema.fields.forEach((field) => {
             expect(screen.getByText(field.label)).toBeInTheDocument()
             switch (field.type) {
                 case 'text':
@@ -36,55 +45,99 @@ describe('FormRenderer Component', () => {
     })
 
     it('renders the submit and reset buttons', () => {
-        render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
         expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument()
         expect(screen.getByRole('button', { name: 'Reset' })).toBeInTheDocument()
     })
 
     it('updates form data on input change', async () => {
-        render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
 
         await userEvent.type(screen.getByRole('textbox', { name: 'Name' }), 'John Doe')
         expect(screen.getByRole('textbox', { name: 'Name' })).toHaveValue('John Doe')
 
-        const ageInput = screen.getByLabelText(/age/i) // or 'Age' depending on the actual label text
-        await userEvent.type(ageInput, '30') // Simulate typing '30'
-
-        // Assert that the value of the age input is updated correctly
+        const ageInput = screen.getByLabelText(/age/i)
+        await userEvent.type(ageInput, '30')
         expect(ageInput).toHaveValue(30)
 
-        const checkbox = screen.getByRole('checkbox', { name: /subscribe/i }) // case-insensitive matching
-
-        // Simulate clicking the checkbox
+        const checkbox = screen.getByRole('checkbox', { name: /subscribe/i })
         await userEvent.click(checkbox)
-        expect(checkbox).toBeChecked() // Now it should be checked
-
-        // Optionally, you can click again and ensure it's unchecked
+        expect(checkbox).toBeChecked()
         await userEvent.click(checkbox)
         expect(checkbox).not.toBeChecked()
 
-        // Find the select (combobox) element by role and label (name)
-        const select = screen.getByRole('combobox', { name: /gender/i }) // case-insensitive matching
-
-        // Simulate selecting "Male" from the dropdown
+        const select = screen.getByRole('combobox', { name: /gender/i })
         await userEvent.selectOptions(select, 'Male')
-
-        // Assert that the value of the select has been updated to "Male"
         expect(select).toHaveValue('Male')
     })
 
     it('renders the DateField and allows date selection', async () => {
-        render(<FormRenderer schema={schema} zodSchema={myFormSchema} />)
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
 
-        const dateLabel = screen.getByText(/Date of Birth/i)
+        const dateLabel = screen.getByText(/D.O.B/i)
         expect(dateLabel).toBeInTheDocument()
 
-        const dateInput = screen.getByRole('textbox', { name: /Date of Birth/i })
+        const dateInput = screen.getByRole('textbox', { name: /D.O.B/i })
         expect(dateInput).toBeInTheDocument()
 
         await userEvent.click(dateInput)
 
         const calendar = await screen.findByRole('dialog', undefined, { timeout: 5000 })
         expect(calendar).toBeInTheDocument()
+    })
+
+    it('displays validation errors on submit when data is invalid', async () => {
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
+
+        await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+        expect(screen.queryByText(/age must be 0 or more/i)).toBeNull()
+        expect(screen.queryByText(/please select a gender/i)).toBeNull()
+        expect(screen.queryByText(/please select a date/i)).toBeNull()
+    })
+
+    it('displays specific validation errors for different invalid inputs', async () => {
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
+
+        await userEvent.type(screen.getByRole('textbox', { name: 'Name' }), 'J')
+        await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+        expect(screen.getByText(/name must be at least 2 characters/i)).toBeInTheDocument()
+
+        await userEvent.type(screen.getByRole('textbox', { name: 'Write' }), 'abc')
+        await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+    })
+
+    it('displays "Age must be 0 or more" error for invalid age', async () => {
+        render(
+            <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+                <FormRenderer />
+            </FormProvider>
+        )
+
+        await userEvent.type(screen.getByLabelText(/age/i), '-5')
+        await userEvent.click(screen.getByRole('button', { name: 'Submit' }))
+
+        await waitFor(() => {
+            expect(screen.getByText((content) => content?.includes('Age must be 0 or more'))).toBeInTheDocument()
+        })
     })
 })

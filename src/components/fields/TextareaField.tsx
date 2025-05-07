@@ -3,7 +3,7 @@ import { Styles as S } from '../FormStyles'
 
 export default function TextareaField({ field, value, onChange, error }: FieldProps<string>) {
     return (
-        <S.FormRow>
+        <div>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.Textarea
                 id={field.name}
@@ -14,6 +14,6 @@ export default function TextareaField({ field, value, onChange, error }: FieldPr
                 placeholder={`Enter ${field.label}`}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </S.FormRow>
+        </div>
     )
 }

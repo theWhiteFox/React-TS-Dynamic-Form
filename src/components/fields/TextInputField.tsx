@@ -12,7 +12,7 @@ export default function TextInputField({ field, value, onChange, error }: FieldP
                 value={value}
                 onChange={(e) => onChange(field.name, e.target.value)}
                 placeholder={`Enter ${field.name}`}
-                title={`Input for ${field.name}`}
+                title={`Input for ${field.label}`}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
         </div>

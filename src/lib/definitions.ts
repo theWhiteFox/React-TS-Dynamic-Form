@@ -1,5 +1,5 @@
 // General Field Types for form fields
-export type FieldType = 'text' | 'number' | 'checkbox' | 'select' | 'date' | 'textarea'
+type FieldType = 'text' | 'number' | 'checkbox' | 'select' | 'date' | 'textarea'
 
 // Interface for form schema
 export interface FormSchema {
@@ -8,7 +8,7 @@ export interface FormSchema {
 }
 
 // Base structure for any field type
-export type BaseField = {
+type BaseField = {
     label: string
     name: string
     required?: boolean
@@ -23,11 +23,12 @@ export interface FieldProps<T> {
 }
 
 // Specific Field Types with additional attributes
-type TextField = BaseField & { type: 'text' | 'textarea' }
+type TextField = BaseField & { type: 'text' }
+type TextareaField = BaseField & { type: 'textarea' }
 type NumberField = BaseField & { type: 'number'; min?: number; max?: number }
 type CheckboxField = BaseField & { type: 'checkbox' }
 type DateField = BaseField & { type: 'date' }
 type SelectField = BaseField & { type: 'select'; options?: string[] }
 
 // Union type for all field types
-export type Field = TextField | NumberField | CheckboxField | DateField | SelectField
+export type Field = TextField | TextareaField | NumberField | CheckboxField | DateField | SelectField

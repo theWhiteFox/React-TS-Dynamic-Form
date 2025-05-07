@@ -24,8 +24,8 @@ const StyledForm = styled.form`
 `
 
 const FormRow = styled.div`
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
     padding: .5em;
 `
 
@@ -109,6 +109,14 @@ const Select = styled.select`
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: .8rem;
+  background-color: white;
+  color: #333;
+`
+
+const Option = styled.option`
+    background-color: white;
+    color: #333;
+    font-size: .8rem;
 `
 
 const Textarea = styled.textarea`
@@ -116,7 +124,7 @@ const Textarea = styled.textarea`
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical; /* Allows vertical resizing */
+    resize: vertical;
     min-height: 100px;
     background-color: #f9f9f9;
 
@@ -130,17 +138,18 @@ const Textarea = styled.textarea`
         color: #888;
     }
 
-    /* Optional: Add responsiveness */
     @media (max-width: 768px) {
         font-size: 0.9rem;
     }
 `
 
-
 const ErrorText = styled.div`
   color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+   span {
+    font-weight: bold;
+  }
 `
 
 const SubmitRow = styled.div`
@@ -149,10 +158,8 @@ const SubmitRow = styled.div`
    margin-top: 2rem;
 `
 
-const SubmitButton = styled.button`
+const Button = styled.button<{ $variant: 'submit' | 'reset' }>`
   padding: 0.4rem .8rem;
-  background: #007bff;
-  color: #fff;
   border: none;
   border-radius: 6px;
   font-weight: bold;
@@ -160,24 +167,15 @@ const SubmitButton = styled.button`
   font-size: .8rem;
   transition: background-color 0.2s ease-in-out;
 
-  &:hover {
-    background: #0056b3;
-  }
-`
-const ResetButton = styled.button`
-  padding: 0.4rem .8rem;
-  background: #ffc107; 
-  color: #333;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: .8rem;
-  transition: background-color 0.2s ease-in-out;
+    background-color: ${({ $variant }) =>
+    $variant === 'reset' ? '#ffa500' : '#28a745'};
+    color: ${({ $variant }) =>
+    $variant === 'reset' ? '#333' : '#fff'};
 
-  &:hover {
-    background: #e0a800;
-  }
+    &:hover {
+        background-color: ${({ $variant }) =>
+    $variant === 'reset' ? '#e69500' : '#218838'};
+    }
 `
 
 const JsonOutput = styled.pre`
@@ -187,13 +185,11 @@ const JsonOutput = styled.pre`
     border-radius: 5px;
     font-family: "Courier New", Courier, monospace;
     font-size: 1rem;
-    white-space: pre-wrap; /* Ensures text wraps if it's too long */
-    word-wrap: break-word; /* Breaks long words that don’t fit in the container */
+    white-space: pre-wrap;
+    word-wrap: break-word;
     max-width: 100%;
-    overflow-x: auto; /* Allows horizontal scrolling if content is too wide */
+    overflow-x: auto;
     margin-top: 20px;
-
-    /* Optional: Add a shadow for better visibility */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `
 
@@ -207,11 +203,11 @@ export const Styles = {
   Input,
   SmallInput,
   Select,
+  Option,
   Textarea,
   ErrorText,
   SubmitRow,
-  SubmitButton,
-  ResetButton,
+  Button,
   CustomInput,
   JsonOutput
 }

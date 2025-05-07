@@ -5,7 +5,7 @@ export default function CheckboxInputField({ field, value, onChange, error }: Fi
     return (
         <div>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
-            <input
+            <S.Input
                 id={field.name}
                 type="checkbox"
                 name={field.name}

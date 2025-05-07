@@ -10,13 +10,13 @@ export default function DropdownInputField({ field, value, onChange, error }: Fi
                 name={field.name}
                 value={value}
                 onChange={(e) => onChange(field.name, e.target.value)}
-                title={`Input for ${field.name}`}
+                title={`Input for ${field.label}`}
             >
-                <option value="">-- Select --</option>
+                <S.Option value="">-- Select --</S.Option>
                 {field.options?.map((option) => (
-                    <option key={option} value={option}>
+                    <S.Option key={option} value={option}>
                         {option}
-                    </option>
+                    </S.Option>
                 ))}
             </S.Select>
             {error && <S.ErrorText>{error}</S.ErrorText>}

@@ -1,24 +1,21 @@
 import { FormEvent, useState } from "react"
-import { z } from 'zod'
-import { Field, FormSchema } from "../lib/definitions"
+import { useFormContext } from "../hooks/useFormHook"
+import { Field } from '../lib/definitions'
 import TextField from './fields/TextInputField'
 import AgeNumberField from "./fields/NumberInputField"
 import SubscribeCheckboxField from "./fields/CheckboxInputField"
 import SelectField from "./fields/DropdownInputField"
 import { Styles as S } from './FormStyles'
-import { HiOutlineUser } from 'react-icons/hi'
-import useForm from "../hooks/useForm"
+import { HiOutlineUser, HiGlobe } from 'react-icons/hi'
 import DateField from "./fields/DateField"
 import TextareaField from "./fields/TextareaField"
+import { IconContext } from "react-icons"
+import { uiSchema } from "../lib/schema"
 
-interface Props {
-    schema: FormSchema
-    zodSchema: z.ZodObject<z.ZodRawShape>
-}
 
-export default function FormRenderer({ schema, zodSchema }: Props) {
-    const { formData, handleChange, validate, resetForm: resetFormState } = useForm(zodSchema)
-    const [errors, setErrors] = useState<Record<string, string>>({})
+export default function FormRenderer() {
+    const { formData, handleChange, validate, resetForm: resetFormState, errors } = useFormContext()
+
     const [submitted, setSubmitted] = useState(false)
 
     const handleSubmit = (e: FormEvent) => {
@@ -26,31 +23,20 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
         const result = validate(formData)
 
         if (!result.success) {
-            const zodErrors = result.error.format()
-            const newErrors: Record<string, string> = {}
-
-            for (const key in zodErrors) {
-                if (key !== "_errors" && zodErrors[key]?._errors?.length) {
-                    newErrors[key] = zodErrors[key]._errors[0]
-                }
-            }
-
-            setErrors(newErrors)
             setSubmitted(false)
             return
         }
 
-        setErrors({})
         setSubmitted(true)
     }
 
     const resetForm = () => {
         resetFormState()
-        setErrors({})
         setSubmitted(false)
     }
 
     const renderField = (field: Field) => {
+        const errorMessage = errors?.formErrors?.fieldErrors?.[field.name]?.[0]
         const value = (() => {
             const raw = formData[field.name as keyof typeof formData]
 
@@ -91,11 +77,11 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
             <Component
                 key={field.name}
                 field={field}
-                value={value}
+                value={value as string | number | boolean}
                 onChange={(name: string, value: string | number | boolean) =>
-                    handleChange({ target: { name, value } } as React.ChangeEvent<HTMLInputElement>)
+                    handleChange(name, value)
                 }
-                error={errors[field.name]}
+                error={errorMessage}
             />
         )
     }
@@ -103,16 +89,21 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
     return (
         <S.FormContainer>
             <S.StyledForm onSubmit={handleSubmit}>
+                <IconContext.Provider value={{ color: 'blue', size: '20px' }}>
+                    <a href="https://www.thewhitefoxdev.blog/blog/React-TS-Dynamic-Form" title="Learn more Blog Post">
+                        <HiGlobe />
+                    </a>
+                </IconContext.Provider>
                 <S.UserIconWrapper size="2.5em">
                     <HiOutlineUser size={42} />
                 </S.UserIconWrapper>
-                <h2>{schema.title}</h2>
-                <S.FieldWrapper>{schema.fields.map(renderField)}</S.FieldWrapper>
+                <h2>{uiSchema.title}</h2>
+                <S.FieldWrapper>{uiSchema.fields.map(renderField)}</S.FieldWrapper>
                 <S.SubmitRow>
-                    <S.SubmitButton type="submit">Submit</S.SubmitButton>
-                    <S.ResetButton type="button" onClick={resetForm}>
+                    <S.Button type="submit" $variant="submit">Submit</S.Button>
+                    <S.Button type="button" $variant="reset" onClick={resetForm}>
                         Reset
-                    </S.ResetButton>
+                    </S.Button>
                 </S.SubmitRow>
                 {submitted && (
                     <S.JsonOutput>
