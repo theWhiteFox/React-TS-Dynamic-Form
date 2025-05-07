@@ -6,10 +6,11 @@ import AgeNumberField from "./fields/NumberInputField"
 import SubscribeCheckboxField from "./fields/CheckboxInputField"
 import SelectField from "./fields/DropdownInputField"
 import { Styles as S } from './FormStyles'
-import { HiOutlineUser } from 'react-icons/hi'
+import { HiOutlineUser, HiGlobe } from 'react-icons/hi'
 import useForm from "../hooks/useForm"
 import DateField from "./fields/DateField"
 import TextareaField from "./fields/TextareaField"
+import { IconContext } from "react-icons"
 
 interface Props {
     schema: FormSchema
@@ -103,6 +104,11 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
     return (
         <S.FormContainer>
             <S.StyledForm onSubmit={handleSubmit}>
+                <IconContext.Provider value={{ color: 'blue', size: '20px' }}>
+                    <a href="https://www.thewhitefoxdev.blog/blog/React-TS-Dynamic-Form" title="Learn more Blog Post">
+                        <HiGlobe />
+                    </a>
+                </IconContext.Provider>
                 <S.UserIconWrapper size="2.5em">
                     <HiOutlineUser size={42} />
                 </S.UserIconWrapper>
