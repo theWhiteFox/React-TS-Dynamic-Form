@@ -11,7 +11,8 @@ export const myFormSchema = z.object({
         .optional(),
     subscribe: z.boolean().default(false),
     gender: z.enum(["Male", "Female", "Other"]).optional(),
-    date: z.coerce.date().optional()
+    date: z.coerce.date().optional(),
+    words: z.string().min(5, { message: "Please write at least 5 characters." }).optional()
 })
 
 export const schema: FormSchema = {

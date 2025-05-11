@@ -116,7 +116,7 @@ const Textarea = styled.textarea`
     font-size: 1rem;
     border: 1px solid #ccc;
     border-radius: 4px;
-    resize: vertical; /* Allows vertical resizing */
+    resize: vertical;
     min-height: 100px;
     background-color: #f9f9f9;
 
@@ -130,7 +130,6 @@ const Textarea = styled.textarea`
         color: #888;
     }
 
-    /* Optional: Add responsiveness */
     @media (max-width: 768px) {
         font-size: 0.9rem;
     }
@@ -139,8 +138,11 @@ const Textarea = styled.textarea`
 
 const ErrorText = styled.div`
   color: #dc3545;
-  font-size: 0.875rem;
-  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+   span {
+    font-weight: bold;
+  }
 `
 
 const SubmitRow = styled.div`
@@ -187,13 +189,11 @@ const JsonOutput = styled.pre`
     border-radius: 5px;
     font-family: "Courier New", Courier, monospace;
     font-size: 1rem;
-    white-space: pre-wrap; /* Ensures text wraps if it's too long */
-    word-wrap: break-word; /* Breaks long words that don’t fit in the container */
+    white-space: pre-wrap;
+    word-wrap: break-word;
     max-width: 100%;
-    overflow-x: auto; /* Allows horizontal scrolling if content is too wide */
+    overflow-x: auto;
     margin-top: 20px;
-
-    /* Optional: Add a shadow for better visibility */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 `
 

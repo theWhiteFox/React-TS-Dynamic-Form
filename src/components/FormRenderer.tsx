@@ -18,8 +18,8 @@ interface Props {
 }
 
 export default function FormRenderer({ schema, zodSchema }: Props) {
-    const { formData, handleChange, validate, resetForm: resetFormState } = useForm(zodSchema)
-    const [errors, setErrors] = useState<Record<string, string>>({})
+    const { formData, handleChange, validate, resetForm: resetFormState, errors } = useForm(zodSchema)
+
     const [submitted, setSubmitted] = useState(false)
 
     const handleSubmit = (e: FormEvent) => {
@@ -27,31 +27,20 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
         const result = validate(formData)
 
         if (!result.success) {
-            const zodErrors = result.error.format()
-            const newErrors: Record<string, string> = {}
-
-            for (const key in zodErrors) {
-                if (key !== "_errors" && zodErrors[key]?._errors?.length) {
-                    newErrors[key] = zodErrors[key]._errors[0]
-                }
-            }
-
-            setErrors(newErrors)
             setSubmitted(false)
             return
         }
 
-        setErrors({})
         setSubmitted(true)
     }
 
     const resetForm = () => {
         resetFormState()
-        setErrors({})
         setSubmitted(false)
     }
 
     const renderField = (field: Field) => {
+        const errorMessage = errors?.formErrors?.fieldErrors?.[field.name]?.[0]
         const value = (() => {
             const raw = formData[field.name as keyof typeof formData]
 
@@ -96,7 +85,7 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
                 onChange={(name: string, value: string | number | boolean) =>
                     handleChange({ target: { name, value } } as React.ChangeEvent<HTMLInputElement>)
                 }
-                error={errors[field.name]}
+                error={errorMessage}
             />
         )
     }
