@@ -24,8 +24,8 @@ const StyledForm = styled.form`
 `
 
 const FormRow = styled.div`
-   display: flex;
-   justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
     padding: .5em;
 `
 
