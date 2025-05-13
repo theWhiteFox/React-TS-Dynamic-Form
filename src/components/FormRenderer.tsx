@@ -104,10 +104,10 @@ export default function FormRenderer({ schema, zodSchema }: Props) {
                 <h2>{schema.title}</h2>
                 <S.FieldWrapper>{schema.fields.map(renderField)}</S.FieldWrapper>
                 <S.SubmitRow>
-                    <S.SubmitButton type="submit">Submit</S.SubmitButton>
-                    <S.ResetButton type="button" onClick={resetForm}>
+                    <S.Button type="submit" $variant="submit">Submit</S.Button>
+                    <S.Button type="button" $variant="reset" onClick={resetForm}>
                         Reset
-                    </S.ResetButton>
+                    </S.Button>
                 </S.SubmitRow>
                 {submitted && (
                     <S.JsonOutput>

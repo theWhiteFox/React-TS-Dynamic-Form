@@ -109,6 +109,14 @@ const Select = styled.select`
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: .8rem;
+  background-color: white;
+  color: #333;
+`
+
+const Option = styled.option`
+    background-color: white;
+    color: #333;
+    font-size: .8rem;
 `
 
 const Textarea = styled.textarea`
@@ -135,7 +143,6 @@ const Textarea = styled.textarea`
     }
 `
 
-
 const ErrorText = styled.div`
   color: #dc3545;
   font-size: 0.8rem;
@@ -151,10 +158,8 @@ const SubmitRow = styled.div`
    margin-top: 2rem;
 `
 
-const SubmitButton = styled.button`
+const Button = styled.button<{ $variant: 'submit' | 'reset' }>`
   padding: 0.4rem .8rem;
-  background: #007bff;
-  color: #fff;
   border: none;
   border-radius: 6px;
   font-weight: bold;
@@ -162,24 +167,15 @@ const SubmitButton = styled.button`
   font-size: .8rem;
   transition: background-color 0.2s ease-in-out;
 
-  &:hover {
-    background: #0056b3;
-  }
-`
-const ResetButton = styled.button`
-  padding: 0.4rem .8rem;
-  background: #ffc107; 
-  color: #333;
-  border: none;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  font-size: .8rem;
-  transition: background-color 0.2s ease-in-out;
+    background-color: ${({ $variant }) =>
+    $variant === 'reset' ? '#ffa500' : '#28a745'};
+    color: ${({ $variant }) =>
+    $variant === 'reset' ? '#333' : '#fff'};
 
-  &:hover {
-    background: #e0a800;
-  }
+    &:hover {
+        background-color: ${({ $variant }) =>
+    $variant === 'reset' ? '#e69500' : '#218838'};
+    }
 `
 
 const JsonOutput = styled.pre`
@@ -207,11 +203,11 @@ export const Styles = {
   Input,
   SmallInput,
   Select,
+  Option,
   Textarea,
   ErrorText,
   SubmitRow,
-  SubmitButton,
-  ResetButton,
+  Button,
   CustomInput,
   JsonOutput
 }
