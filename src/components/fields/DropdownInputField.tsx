@@ -3,14 +3,14 @@ import { Styles as S } from '../FormStyles'
 
 export default function DropdownInputField({ field, value, onChange, error }: FieldProps<string>) {
     return (
-        <div>
+        <S.FormRow>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.Select
                 id={field.name}
                 name={field.name}
                 value={value}
                 onChange={(e) => onChange(field.name, e.target.value)}
-                title={`Input for ${field.name}`}
+                title={`Input for ${field.label}`}
             >
                 <S.Option value="">-- Select --</S.Option>
                 {field.options?.map((option) => (
@@ -20,6 +20,6 @@ export default function DropdownInputField({ field, value, onChange, error }: Fi
                 ))}
             </S.Select>
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </div>
+        </S.FormRow>
     )
 }

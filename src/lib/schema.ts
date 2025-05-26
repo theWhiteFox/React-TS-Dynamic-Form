@@ -1,10 +1,9 @@
 import { FormSchema } from "./definitions"
 import { z } from 'zod'
 
-export const myFormSchema = z.object({
+export const validationZodSchema = z.object({
     name: z.string().min(2, { message: "Name must be at least 2 characters." }),
     age: z
-        .coerce
         .number()
         .min(0, "Age must be 0 or more")
         .max(120, "Age must be 120 or less")
@@ -15,7 +14,7 @@ export const myFormSchema = z.object({
     words: z.string().min(5, { message: "Please write at least 5 characters." }).optional()
 })
 
-export const schema: FormSchema = {
+export const uiSchema: FormSchema = {
     title: "User Registration",
     fields: [
         { label: "Name", type: "text", name: "name", required: true },

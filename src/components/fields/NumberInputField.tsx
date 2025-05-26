@@ -7,7 +7,7 @@ interface Props extends FieldProps<number> {
 
 export default function NumberInputField({ field, value, onChange, error }: Props) {
     return (
-        <div>
+        <S.FormRow>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.SmallInput
                 id={field.name}
@@ -17,9 +17,9 @@ export default function NumberInputField({ field, value, onChange, error }: Prop
                 onChange={(e) => onChange(field.name, Number(e.target.value))}
                 aria-label={field.label}
                 placeholder={`Enter ${field.name}`}
-                title={`Input for ${field.name}`}
+                title={`Input for ${field.label}`}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </div>
+        </S.FormRow>
     )
 }

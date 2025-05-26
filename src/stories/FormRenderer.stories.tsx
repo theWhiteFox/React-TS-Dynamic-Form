@@ -1,7 +1,8 @@
 // stories/FormRenderer.stories.tsx
 import type { Meta, StoryObj } from '@storybook/react'
 import FormRenderer from '../components/FormRenderer'
-import { schema, myFormSchema } from '../lib/schema' // or wherever your schema lives
+import { FormProvider } from '../providers/useFormProvider'
+import { uiSchema, validationZodSchema } from '../lib/schema' // or wherever your schema lives
 
 const meta: Meta<typeof FormRenderer> = {
     title: 'Form/FormRenderer',
@@ -10,10 +11,11 @@ const meta: Meta<typeof FormRenderer> = {
         layout: 'centered',
     },
     tags: ['autodocs'],
-    args: {
-        schema,
-        zodSchema: myFormSchema,
-    },
+    render: () => (
+        <FormProvider schema={uiSchema} zodSchema={validationZodSchema}>
+            <FormRenderer />
+        </FormProvider>
+    )
 }
 
 export default meta

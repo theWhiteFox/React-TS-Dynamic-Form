@@ -25,7 +25,7 @@ export default function DateField({ field, value, onChange, error }: FieldProps<
     }
 
     return (
-        <div>
+        <S.FormRow>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <DatePicker
                 id={field.name}
@@ -40,6 +40,6 @@ export default function DateField({ field, value, onChange, error }: FieldProps<
                 customInput={<S.CustomInput />}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </div>
+        </S.FormRow>
     )
 }
