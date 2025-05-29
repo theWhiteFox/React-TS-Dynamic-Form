@@ -5,7 +5,6 @@ import useForm from '../hooks/useForm'
 import { FormContextProps, FormContext } from '../context/form-types'
 import { FormSchema } from '../lib/definitions'
 
-
 // Define the props for the FormProvider component
 interface FormProviderProps {
     schema: FormSchema
@@ -18,7 +17,14 @@ export const FormProvider = ({ schema, zodSchema, children }: FormProviderProps)
 
     // Wrapper to match the context's handleChange signature
     const handleChange = (name: string, value: unknown) => {
-        internalHandleChange({ target: { name, value } } as React.ChangeEvent<HTMLInputElement>)
+        // Create a more complete synthetic event or call the hook differently  
+        const syntheticEvent = {
+            target: { name, value },
+            currentTarget: { name, value },
+            preventDefault: () => { },
+            stopPropagation: () => { }
+        } as React.ChangeEvent<HTMLInputElement>
+        internalHandleChange(syntheticEvent)
     }
 
     const value: FormContextProps = {
