@@ -1,4 +1,10 @@
-import{d as $}from"./index-DrFu-skq.js";const{useMemo:x,useEffect:f}=__STORYBOOK_MODULE_PREVIEW_API__,{global:p}=__STORYBOOK_MODULE_GLOBAL__;var m="outline",u=i=>{(Array.isArray(i)?i:[i]).forEach(r)},r=i=>{let t=typeof i=="string"?i:i.join(""),o=p.document.getElementById(t);o&&o.parentElement&&o.parentElement.removeChild(o)},b=(i,t)=>{let o=p.document.getElementById(i);if(o)o.innerHTML!==t&&(o.innerHTML=t);else{let n=p.document.createElement("style");n.setAttribute("id",i),n.innerHTML=t,p.document.head.appendChild(n)}};function s(i){return $`
+import{d as $}from"./index-DrFu-skq.js";const{useMemo:x,useEffect:f}=__STORYBOOK_MODULE_PREVIEW_API__,{global:p}=__STORYBOOK_MODULE_GLOBAL__;var m="outline",u=i=>{(Array.isArray(i)?i:[i]).forEach(r)},r=i=>{let t=typeof i=="string"?i:i.join(""),o=p.document.getElementById(t);o&&o.parentElement&&o.parentElement.removeChild(o)},b=(i,t)=>{let o=p.document.getElementById(i);if(o)o.innerHTML!==t&&(o.innerHTML=t);else{let n=p.document.createElement("style");n.setAttribute("id",i),n.innerHTML=t,p.document.head.appendChild(n)}};/**
+     * Generates a tagged template literal containing CSS rules that apply distinct colored outlines to a wide range of HTML elements, scoped by the provided selector prefix.
+     *
+     * @param {string} i - Selector prefix to scope the outline styles (e.g., a container class or attribute selector).
+     * @returns {string} CSS string with outline rules for various HTML elements, each assigned a unique color.
+     */
+    function s(i){return $`
     ${i} body {
       outline: 1px solid #2980b9 !important;
     }

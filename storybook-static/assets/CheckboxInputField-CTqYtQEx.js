@@ -1,4 +1,15 @@
-import{j as r}from"./jsx-runtime-D_zvdyIk.js";import{S as n}from"./FormStyles-DUPA13CZ.js";function l({field:e,value:a,onChange:i,error:t}){return r.jsxs("div",{children:[r.jsx(n.Label,{htmlFor:e.name,children:e.label}),r.jsx("input",{id:e.name,type:"checkbox",name:e.name,checked:a===!0,onChange:s=>i(e.name,s.target.checked),title:`Input for ${e.label}`}),t&&r.jsx(n.ErrorText,{children:t})]})}l.__docgenInfo={description:"",methods:[],displayName:"CheckboxInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
+import{j as r}from"./jsx-runtime-D_zvdyIk.js";import{S as n}from"./FormStyles-DUPA13CZ.js";/**
+ * Renders a labeled checkbox input field with controlled checked state and error display.
+ *
+ * @template T
+ * @param {Object} props
+ * @param {{ label: string, name: string, type: string, required?: boolean, options?: string[] }} props.field - Field metadata including label, name, and type.
+ * @param {T} props.value - The current checked state; expected to be a boolean.
+ * @param {(name: string, value: T) => void} props.onChange - Callback invoked with the field name and new checked value when the checkbox state changes.
+ * @param {string} [props.error] - Optional error message to display below the input.
+ * @returns {JSX.Element} The rendered checkbox input field with label and optional error message.
+ */
+function l({field:e,value:a,onChange:i,error:t}){return r.jsxs("div",{children:[r.jsx(n.Label,{htmlFor:e.name,children:e.label}),r.jsx("input",{id:e.name,type:"checkbox",name:e.name,checked:a===!0,onChange:s=>i(e.name,s.target.checked),title:`Input for ${e.label}`}),t&&r.jsx(n.ErrorText,{children:t})]})}l.__docgenInfo={description:"",methods:[],displayName:"CheckboxInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
     label: string
     name: string
     required?: boolean

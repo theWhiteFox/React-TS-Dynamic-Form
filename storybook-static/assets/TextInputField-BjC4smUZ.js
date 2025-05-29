@@ -1,4 +1,17 @@
-import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{S as n}from"./FormStyles-DUPA13CZ.js";function l({field:e,value:a,onChange:i,error:r}){return t.jsxs("div",{children:[t.jsx(n.Label,{htmlFor:e.name,children:e.label}),t.jsx(n.CustomInput,{id:e.name,type:"text",name:e.name,value:a,onChange:s=>i(e.name,s.target.value),placeholder:`Enter ${e.name}`,title:`Input for ${e.name}`}),r&&t.jsx(n.ErrorText,{children:r})]})}l.__docgenInfo={description:"",methods:[],displayName:"TextInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
+import{j as t}from"./jsx-runtime-D_zvdyIk.js";import{S as n}from"./FormStyles-DUPA13CZ.js";/**
+ * Renders a labeled text input field with optional error message.
+ *
+ * Displays a label, a styled text input, and, if provided, an error message below the input. The input value is controlled and updates are propagated via the `onChange` callback.
+ *
+ * @param {Object} props
+ * @param {Object} props.field - Field metadata including label, name, and type.
+ * @param {string} props.value - The current value of the input.
+ * @param {function} props.onChange - Callback invoked with the field name and new value when the input changes.
+ * @param {string} [props.error] - Optional error message to display below the input.
+ *
+ * @returns {JSX.Element} The rendered text input field component.
+ */
+function l({field:e,value:a,onChange:i,error:r}){return t.jsxs("div",{children:[t.jsx(n.Label,{htmlFor:e.name,children:e.label}),t.jsx(n.CustomInput,{id:e.name,type:"text",name:e.name,value:a,onChange:s=>i(e.name,s.target.value),placeholder:`Enter ${e.name}`,title:`Input for ${e.name}`}),r&&t.jsx(n.ErrorText,{children:r})]})}l.__docgenInfo={description:"",methods:[],displayName:"TextInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
     label: string
     name: string
     required?: boolean
