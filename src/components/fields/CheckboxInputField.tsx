@@ -3,7 +3,7 @@ import { Styles as S } from '../FormStyles'
 
 export default function CheckboxInputField({ field, value, onChange, error }: FieldProps<boolean>) {
     return (
-        <S.FormRow>
+        <div>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.Input
                 id={field.name}
@@ -14,6 +14,6 @@ export default function CheckboxInputField({ field, value, onChange, error }: Fi
                 title={`Input for ${field.label}`}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </S.FormRow>
+        </div>
     )
 }

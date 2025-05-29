@@ -1,45 +1,19 @@
-import { createContext, FormEvent, useState, ReactNode } from "react"
+import { FormEvent, useState } from "react"
 import { useFormContext } from "../hooks/useFormHook"
-import { z } from 'zod'
-import { Field, FormSchema } from '../lib/definitions'
+// import { z } from 'zod'
+import { Field } from '../lib/definitions'
 import TextField from './fields/TextInputField'
 import AgeNumberField from "./fields/NumberInputField"
 import SubscribeCheckboxField from "./fields/CheckboxInputField"
 import SelectField from "./fields/DropdownInputField"
 import { Styles as S } from './FormStyles'
 import { HiOutlineUser, HiGlobe } from 'react-icons/hi'
-import useForm from "../hooks/useForm"
+// import useForm from "../hooks/useForm"
 import DateField from "./fields/DateField"
 import TextareaField from "./fields/TextareaField"
 import { IconContext } from "react-icons"
 import { uiSchema } from "../lib/schema"
 
-// 1. Define the shape of the data that will be provided by the context 
-interface FormContextProps {
-    formData: Record<string, unknown>
-    handleChange: (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void
-    validate: (data: Record<string, unknown>) => z.SafeParseReturnType<unknown, unknown>
-    resetForm: () => void
-    schema: FormSchema
-}
-
-// Create a context to share form data and handlers across components
-// undefined is used as the default value to indicate that the context is not initialized
-const FormContext = createContext<FormContextProps | undefined>(undefined)
-
-export const FormProvider = ({ schema, zodSchema, children }: { schema: FormSchema; zodSchema: z.ZodObject<z.ZodRawShape>; children: ReactNode }) => {
-    const { formData, handleChange, validate, resetForm: resetFromState, errors } = useForm(zodSchema)
-
-    const value = {
-        formData,
-        handleChange,
-        errors,
-        validate,
-        resetForm: resetFromState,
-        schema
-    }
-    return <FormContext.Provider value={value}>{children}</FormContext.Provider>
-}
 
 export default function FormRenderer() {
     const { formData, handleChange, validate, resetForm: resetFormState, errors } = useFormContext()

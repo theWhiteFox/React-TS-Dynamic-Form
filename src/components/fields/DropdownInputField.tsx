@@ -3,7 +3,7 @@ import { Styles as S } from '../FormStyles'
 
 export default function DropdownInputField({ field, value, onChange, error }: FieldProps<string>) {
     return (
-        <S.FormRow>
+        <div>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.Select
                 id={field.name}
@@ -20,6 +20,6 @@ export default function DropdownInputField({ field, value, onChange, error }: Fi
                 ))}
             </S.Select>
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </S.FormRow>
+        </div>
     )
 }

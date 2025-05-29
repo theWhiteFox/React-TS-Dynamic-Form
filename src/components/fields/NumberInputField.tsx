@@ -7,7 +7,7 @@ interface Props extends FieldProps<number> {
 
 export default function NumberInputField({ field, value, onChange, error }: Props) {
     return (
-        <S.FormRow>
+        <div>
             <S.Label htmlFor={field.name}>{field.label}</S.Label>
             <S.SmallInput
                 id={field.name}
@@ -20,6 +20,6 @@ export default function NumberInputField({ field, value, onChange, error }: Prop
                 title={`Input for ${field.label}`}
             />
             {error && <S.ErrorText>{error}</S.ErrorText>}
-        </S.FormRow>
+        </div>
     )
 }
