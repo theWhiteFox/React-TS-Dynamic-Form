@@ -1,4 +1,16 @@
-import{j as n}from"./jsx-runtime-D_zvdyIk.js";import{S as a}from"./FormStyles-DUPA13CZ.js";function u({field:e,value:s,onChange:l,error:t}){var i;return n.jsxs("div",{children:[n.jsx(a.Label,{htmlFor:e.name,children:e.label}),n.jsxs(a.Select,{id:e.name,name:e.name,value:s,onChange:r=>l(e.name,r.target.value),title:`Input for ${e.name}`,children:[n.jsx(a.Option,{value:"",children:"-- Select --"}),(i=e.options)==null?void 0:i.map(r=>n.jsx(a.Option,{value:r,children:r},r))]}),t&&n.jsx(a.ErrorText,{children:t})]})}u.__docgenInfo={description:"",methods:[],displayName:"DropdownInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
+import{j as n}from"./jsx-runtime-D_zvdyIk.js";import{S as a}from"./FormStyles-DUPA13CZ.js";/**
+ * Renders a labeled dropdown select input with options and optional error message.
+ *
+ * Displays a select field with a default placeholder and options provided via the {@link field} prop. When the selection changes, calls {@link onChange} with the field name and selected value. If an error message is provided, it is shown below the input.
+ *
+ * @template T
+ * @param {Object} props
+ * @param {{ label: string, name: string, required?: boolean, type: string, options?: string[] }} props.field - Field metadata and options for the dropdown.
+ * @param {T} props.value - The currently selected value.
+ * @param {(name: string, value: T) => void} props.onChange - Callback invoked when the selected value changes.
+ * @param {string} [props.error] - Optional error message to display.
+ */
+function u({field:e,value:s,onChange:l,error:t}){var i;return n.jsxs("div",{children:[n.jsx(a.Label,{htmlFor:e.name,children:e.label}),n.jsxs(a.Select,{id:e.name,name:e.name,value:s,onChange:r=>l(e.name,r.target.value),title:`Input for ${e.name}`,children:[n.jsx(a.Option,{value:"",children:"-- Select --"}),(i=e.options)==null?void 0:i.map(r=>n.jsx(a.Option,{value:r,children:r},r))]}),t&&n.jsx(a.ErrorText,{children:t})]})}u.__docgenInfo={description:"",methods:[],displayName:"DropdownInputField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
     label: string
     name: string
     required?: boolean

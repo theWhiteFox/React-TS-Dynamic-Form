@@ -13,6 +13,11 @@ import { IconContext } from "react-icons"
 import { uiSchema } from "../lib/schema"
 
 
+/**
+ * Renders a dynamic form based on a predefined schema, managing form state, validation, and submission.
+ *
+ * The form fields, structure, and validation are determined by a static UI schema and context-provided handlers. Displays validation errors and shows the submitted form data as formatted JSON upon successful submission.
+ */
 export default function FormRenderer() {
     const { formData, handleChange, validate, resetForm: resetFormState, errors } = useFormContext()
 

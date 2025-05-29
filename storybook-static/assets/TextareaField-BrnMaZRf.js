@@ -1,4 +1,16 @@
-import{j as r}from"./jsx-runtime-D_zvdyIk.js";import{S as a}from"./FormStyles-DUPA13CZ.js";function l({field:e,value:t,onChange:i,error:n}){return r.jsxs(a.FormRow,{children:[r.jsx(a.Label,{htmlFor:e.name,children:e.label}),r.jsx(a.Textarea,{id:e.name,name:e.name,value:t,onChange:s=>i(e.name,s.target.value),rows:4,placeholder:`Enter ${e.label}`}),n&&r.jsx(a.ErrorText,{children:n})]})}l.__docgenInfo={description:"",methods:[],displayName:"TextareaField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
+import{j as r}from"./jsx-runtime-D_zvdyIk.js";import{S as a}from"./FormStyles-DUPA13CZ.js";/**
+ * Renders a labeled textarea input field with optional error display for use in forms.
+ *
+ * @template T
+ * @param {Object} props
+ * @param {{ label: string, name: string, required?: boolean, type: string, options?: string[] }} props.field - Field metadata including label, name, and type.
+ * @param {T} props.value - The current value of the textarea.
+ * @param {(name: string, value: T) => void} props.onChange - Callback invoked when the textarea value changes.
+ * @param {string} [props.error] - Optional error message to display below the textarea.
+ *
+ * @returns {JSX.Element} A form row containing a label, textarea, and optional error message.
+ */
+function l({field:e,value:t,onChange:i,error:n}){return r.jsxs(a.FormRow,{children:[r.jsx(a.Label,{htmlFor:e.name,children:e.label}),r.jsx(a.Textarea,{id:e.name,name:e.name,value:t,onChange:s=>i(e.name,s.target.value),rows:4,placeholder:`Enter ${e.label}`}),n&&r.jsx(a.ErrorText,{children:n})]})}l.__docgenInfo={description:"",methods:[],displayName:"TextareaField",props:{field:{required:!0,tsType:{name:"intersection",raw:"BaseField & { type: FieldType; options?: string[] }",elements:[{name:"signature",type:"object",raw:`{
     label: string
     name: string
     required?: boolean

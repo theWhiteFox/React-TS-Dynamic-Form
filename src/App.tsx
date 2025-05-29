@@ -12,6 +12,11 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+/**
+ * Root React component that applies global styles and renders the form within its context provider.
+ *
+ * Wraps the form renderer in a provider that supplies the UI schema and validation schema for form state management and validation.
+ */
 function App() {
 
   return (
