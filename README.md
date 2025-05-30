@@ -36,7 +36,7 @@ A lightweight, schema-driven form builder built with **React**, **TypeScript**, 
 
 It's worth mentioning that this project is built with Vite, which generally provides a more **modern** and **efficient** development setup than _CRA_, especially with contemporary Node.js versions.
 
-Frankly, if you were to tell me you're setting this project up with CRA on Node 18 and having no build issues or performance problems, I'd suggest you run far, far away... or perhaps check your console for errors. 😉 Vite offers a much more modern and efficient development setup.
+Frankly, if you were to tell me you're setting this project up with CRA on Node 18 and having no build issues or performance problems, I'd suggest you run far, far away... or perhaps check your console for errors. 😉 Vite offers a much more **modern** and **efficient** development setup.
 
 ### 1. Clone the repo
 
