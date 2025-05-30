@@ -32,9 +32,7 @@ A lightweight, schema-driven form builder built with **React**, **TypeScript**, 
 > - This project was built with **Node v23.9.0**.
 > - If you're using **Create React App (CRA)**, please note that **Node.js v18 reached end-of-life in April 2025**.
 > - While CRA projects may still function on Node 18, it's recommended to use **Node v20 LTS or later** for long-term compatibility and security.
-> - This project uses **Vite**, which is fully compatible with modern Node versions.
-
-It's worth mentioning that this project is built with Vite, which generally provides a more **modern** and **efficient** development setup than _CRA_, especially with contemporary Node.js versions.
+> - It's worth mentioning that this project is built with Vite, which generally provides a more **modern** and **efficient** development setup than _CRA_, especially with contemporary Node.js versions.
 
 Frankly, if you were to tell me you're setting this project up with CRA on Node 18 and having no build issues or performance problems, I'd suggest you run far, far away... or perhaps check your console for errors. 😉 Vite offers a much more **modern** and **efficient** development setup.
 
